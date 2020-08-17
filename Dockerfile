@@ -17,18 +17,18 @@ RUN apt upgrade -y
 RUN apt install -y sudo
 RUN apt install -y software-properties-common
 RUN apt install -y gzip
-
+RUN apt install -y vim-athena
 
 # Adding bioconductor package GenomicDataCommons
 COPY ./bioconductor.R /
 
 # Adding gdc client
 COPY ./gdc-client_v1.6.0_Ubuntu_x64-py3.7_0.zip /usr/local/bin/
-CMD cd /usr/local/bin/ && unzip gdc-client_v1.6.0_Ubuntu_x64-py3.7_0.zip
+RUN cd /usr/local/bin/ && unzip /usr/local/bin/gdc-client_v1.6.0_Ubuntu_x64-py3.7_0.zip
 
 # Adding scripts
-CMD mkdir /scripts
-COPY ./primary_manifest.R /scripts
+RUN mkdir /scripts
+COPY ./primary_manifest.R /scripts/
 
 
 # Adding software to reformat bam file extract only unpaired or partially paired reads.
@@ -37,51 +37,66 @@ COPY ./IOsam.tar.gz /
 RUN gzip -d ./IOsam.tar.gz
 RUN tar xvf ./IOsam.tar
 RUN rm ./IOsam.tar
+RUN mv ./IOsam /usr/local/bin/
+
 
 #RUN cd /usr/local/bin && gzip -d IOsam.tar.gz && tar xvf IOsam.tar && rm IOsam.tar
 
 # GCC
+RUN apt update
 RUN apt install -y build-essential
 RUN apt -y install manpages-dev
 
 #libraies for Beccuti software
+RUN apt update
 RUN apt install -y zlib1g
 RUN apt install -y zlib1g-dev 
 
 # Install curl
+RUN apt update
 RUN apt install -y curl
 
 # Install wget
+RUN apt update
 RUN apt install -y wget
 
 
 # R libs
+RUN apt update
 RUN apt install -y libcurl4-openssl-dev
 RUN apt install -y libssl-dev
 RUN apt install -y libxml2-dev
 
 # Install R
+RUN apt update
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 RUN add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu eoan-cran35/'
 RUN apt install -y r-base
 RUN apt-get install -y r-base-dev
-RUN rm -rf /var/lib/apt/lists/* 
-RUN apt clean
+
 
 # Adding bioconductor package GenomicDataCommons
 WORKDIR /
 RUN R CMD BATCH ./bioconductor.R
 
+# requested to have gdc-client working
+RUN apt update
+RUN apt install -y python3-ndg-httpsclient
 
 # Adding software to reformat bam file extract only unpaired or partially paired reads.
 # example  /usr/local/bin/IOsam/BAMandSAM example.bam test.bam
 # WORKDIR /usr/local/bin/IOsam/
-CMD cd /usr/local/bin/IOsam/ && make clean all
+RUN cd /usr/local/bin/IOsam/ && make clean all
+
+
 
 WORKDIR /
 
-CMD ln -s /usr/bin/python3 /usr/bin/python
+RUN ln -s /usr/bin/python3 /usr/bin/python
 
+# cleanup
+RUN rm -rf /var/lib/apt/lists/* 
+RUN apt clean
 
 
 
