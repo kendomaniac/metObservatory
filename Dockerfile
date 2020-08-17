@@ -22,6 +22,15 @@ RUN apt install -y gzip
 # Adding bioconductor package GenomicDataCommons
 COPY ./bioconductor.R /
 
+# Adding gdc client
+COPY ./gdc-client_v1.6.0_Ubuntu_x64-py3.7_0.zip /usr/local/bin/
+CMD cd /usr/local/bin/ && unzip gdc-client_v1.6.0_Ubuntu_x64-py3.7_0.zip
+
+# Adding scripts
+CMD mkdir /scripts
+COPY ./primary_manifest.R /scripts
+
+
 # Adding software to reformat bam file extract only unpaired or partially paired reads.
 COPY ./IOsam.tar.gz /
 # WORKDIR /usr/local/bin/
@@ -70,4 +79,10 @@ RUN R CMD BATCH ./bioconductor.R
 CMD cd /usr/local/bin/IOsam/ && make clean all
 
 WORKDIR /
+
+CMD ln -s /usr/bin/python3 /usr/bin/python
+
+
+
+
 
