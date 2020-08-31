@@ -45,6 +45,10 @@ docker attach $ID
 
 - as other option you can run the gdc-client outside docker editing and running the script executing_docker.sh
 
+		+ copy executing_docker.sh in the local folder mounted as /scratch e.g. /home/rcaloger/data/
+		
+		+ edit the script changing IDTISSUE, IDTYPE, WORKING_DIR and SCRATCH_DIR
+
  ``` 
  #!/usr/bin/bash
  IDCORE=docker_
@@ -52,8 +56,9 @@ docker attach $ID
  IDTYPE=bam
  ID=$IDCORE$IDTISSUE$IDTYPE
  WORKING_DIR=/scratch/bronchus_and_lung_bam
+ SCRATCH_DIR=/home/rcaloger/data/
  
- ID is the dockerid that is saved in the upper folder with respect to the working no the default is /home/rcaloger/data/
+ ID is the dockerid that is saved in the upper folder with respect to the working dir the default is /home/rcaloger/data/
  /home/rcaloger/data/ is mounted as /scratch in the docker
  
  WORKING_DIR is one folder created by primary.R
