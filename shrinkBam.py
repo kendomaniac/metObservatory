@@ -2,7 +2,7 @@
 import sys # Load a library module print(sys.platform)
 import os
 import os.path
-sys.path.append("/Users/raffaelecalogero/Dropbox/data/comoglio/iggrant/MetObservatory/metObservatory")
+sys.path.append("/scripts/python_functions")
 from functions import extractMet 
 
 """

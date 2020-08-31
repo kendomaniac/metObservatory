@@ -3,7 +3,7 @@ FROM ubuntu:20.04
 
 # LABEL about the custom image
 LABEL maintainer="raffaele.calogero@gmail.com"
-LABEL version="0.1"
+LABEL version="0.4"
 LABEL description="This is custom Docker Image for \
 the extraction of Met gene information \
 from TCGA data."
@@ -26,9 +26,17 @@ COPY ./bioconductor.R /
 COPY ./gdc-client_v1.6.0_Ubuntu_x64-py3.7_0.zip /usr/local/bin/
 RUN cd /usr/local/bin/ && unzip /usr/local/bin/gdc-client_v1.6.0_Ubuntu_x64-py3.7_0.zip
 
-# Adding scripts
+# Adding scripts to download from GTCA repository
 RUN mkdir /scripts
 COPY ./primary_manifest.R /scripts/
+COPY ./executing_docker.sh /scripts/
+
+# Add script to extract met reads
+COPY ./shrinkBam.py /scripts/
+RUN mkdir /scripts/python_functions
+COPY ./functions.py /scripts/python_functions
+
+
 
 
 # Adding software to reformat bam file extract only unpaired or partially paired reads.
