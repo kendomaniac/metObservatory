@@ -20,12 +20,33 @@ def extractMet(folder):
 				if file_in_folder.endswith(".bam"):
 					#print(os.path.join(folder, file_name))
 					mybam = os.path.join(folder, file_name, file_in_folder)
-					mysam = mybam.replace(file_in_folder, 'met.sam')
+					mysam = mybam.replace('bam', 'sam')
 					samtools_view = 'samtools view'
 					met_loc = 'chr7:116672196-116798377' #hg38 location
-					mycommand = str.join(' ', (samtools_view, mybam, met_loc, '> ', mysam))
+					mycommand = str.join(' ', (samtools_view, mybam, met_loc, '>', mysam))
 					print('\n', 'Extracting MET reads', '\n')
 					#print(mycommand, sep="\n")
+					os.system(mycommand)
+					#select only chimeric reads
+					#samtools_chimeric = 'samtools view -f 8x800'
+					#supplementary = os.path.join(folder, file_name, 'supplementary.sam')
+					#removing all correctly paired reads
+					#
+					print('Removing perfectly mapped PE reads', '\n')
+					samtools_others = 'samtools view -b -F  0x2'
+					supplementary = os.path.join(folder, file_name, 'others.bam')
+					mycommand = str.join(' ', (samtools_others, mybam, '>', supplementary))
+					print(mycommand, sep="\n")
+					os.system(mycommand)
+					#indexing others.bam
+					samtools_idx = 'samtools index -b'
+					others = os.path.join(folder, file_name, 'others.bam')
+					mycommand = str.join(' ', (samtools_idx, others))
+					#print(mycommand, sep="\n")					
+					os.system(mycommand)
+					old_bai = os.path.join(folder, file_name, 'others.bam.bai')
+					new_bai = os.path.join(folder, file_name, 'others.bai')
+					mycommand = str.join(' ', ('mv', old_bai, new_bai))
 					os.system(mycommand)
 					#bams stats
 					samtools_idxstats = 'samtools idxstats'
@@ -33,13 +54,14 @@ def extractMet(folder):
 					mystat = str.join(' ', (samtools_idxstats, mybam, '>', stats_output))
 					#print(mystat, sep="\n")
 					os.system(mystat)
-					#extract chimeric reads
-					bamsam = '/usr/local/bin/IOsam/BAMandSAM'
-					mybam2 = mybam.replace(file_in_folder, 'others.bam')
-					mycommand = str.join(' ', (bamsam, mybam, mybam2))
-					print(mycommand, sep="\n")
-					os.system(mycommand)
-					
+					stats_output = os.path.join(folder, file_name, 'others_stats.txt')
+					others_bam = os.path.join(folder, file_name, 'others.bam')
+					mystat = str.join(' ', (samtools_idxstats, others_bam, '>', stats_output))
+					#print(mystat, sep="\n")
+					os.system(mystat)
+					#remove bam
+					#mycommand = str.join(' ', ('rm', mybam))
+					#os.system(mycommand)
 					
 	#print('\n', 'initial bam files are removed', '\n)				
 	return(0)    

@@ -97,6 +97,27 @@ RUN apt install -y python3-ndg-httpsclient
 RUN cd /usr/local/bin/IOsam/ && make clean all
 
 
+WORKDIR /
+
+# adding samtools
+RUN apt update
+RUN sudo apt -y install autoconf automake make gcc perl zlib1g-dev libbz2-dev liblzma-dev libcurl4-gnutls-dev libssl-dev libperl-dev libgsl0-dev
+RUN apt -y install git
+RUN git clone git://github.com/samtools/htslib.git
+RUN cd /htslib
+RUN autoreconf
+RUN ./configure
+RUN make
+RUN make install
+
+WORKDIR /
+
+RUN git clone https://github.com/samtools/samtools.git
+RUN cd /samtools
+RUN autoreconf
+RUN ./configure
+RUN make
+RUN make install
 
 WORKDIR /
 

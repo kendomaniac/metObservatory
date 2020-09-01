@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3
+#!/usr/bin/python
 import sys # Load a library module print(sys.platform)
 import os
 import os.path
