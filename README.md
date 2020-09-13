@@ -21,7 +21,7 @@ docker attach $ID
 R CMD BATCH /scripts/primary.R
 ```
 
-Check primary.Rout to be sue that all folders manifests were correctly crerated.
+Check primary.Rout to be sure that all folders manifests were correctly crerated.
 
 
 ### gdc-client
@@ -65,6 +65,10 @@ docker attach $ID
   
 ```
 
+#### clean_manifest.R
+
+It is a script that creates a new manifest file in case the download is interrupted for some reason. Please edit the script inserting the part of the manifest to be edited and the new name for the manifest. Please remember to edit the xecuting_docker_gdc_download.sh changing the name of the manifest
+
 ### extract Met and all chimeric reads
 
 This is a python script that extract reads at the Met locus using samtools, then uses a specific c++ program to extract all reads which are not mapped or chimeric.
@@ -107,3 +111,35 @@ docker attach $ID
 ```
 
 - execute locally executing_docker_met_others.sh e.g. /home/rcaloger/data/
+
+#### processed_folders.py
+
+TRhis python script generate a list of folder where the extract Met and all chimeric reads script failed. The file generated has the names of all dir in which met.sam and other.bam is not present. This output file can be easily modified to move these folders somewhere else to finish the data processing, see example below.
+
+```
+
+the file il called ls_to-be-processed.sh
+change the file below:
+04572e38-8baf-4a05-bf63-7c6a7a6dbee5
+04a7f289-c045-474e-8b2e-99ca8016539f
+04b5d18e-88c4-403f-987a-63b048808a87
+04d27335-5340-4c7d-a651-d673e2d4e080
+05275795-1405-45c3-9f72-938be4b20840
+0537ed83-8981-499f-b324-2000bd8c8805
+
+in:
+mv 04572e38-8baf-4a05-bf63-7c6a7a6dbee5 ./to_be_processed							
+mv 04a7f289-c045-474e-8b2e-99ca8016539f ./to_be_processed							
+mv 04b5d18e-88c4-403f-987a-63b048808a87 ./to_be_processed							
+mv 04d27335-5340-4c7d-a651-d673e2d4e080 ./to_be_processed							
+mv 05275795-1405-45c3-9f72-938be4b20840 ./to_be_processed							
+mv 0537ed83-8981-499f-b324-2000bd8c8805 ./to_be_processed	
+
+To execute it:
+chmod +x ls_to-be-processed.sh
+./ls_to-be-processed.sh
+
+Then you can modify executing_docker_met_others.sh to finish the data processing
+
+
+```
