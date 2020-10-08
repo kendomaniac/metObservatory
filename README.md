@@ -141,5 +141,10 @@ chmod +x ls_to-be-processed.sh
 
 Then you can modify executing_docker_met_others.sh to finish the data processing
 
+### BFCounter
+
+BFCounter identifies all the k-mers that occur more than once in a DNA sequence data set. BFCounter uses a Bloom filter, a probabilistic data structure that stores all the observed k-mers implicitly in memory with greatly reduced memory requirements.
+
+BFCounter is available in /bin from metobservatory_2020.05.
 
 ```

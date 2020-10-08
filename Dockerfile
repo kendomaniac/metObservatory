@@ -29,7 +29,8 @@ RUN cd /usr/local/bin/ && unzip /usr/local/bin/gdc-client_v1.6.0_Ubuntu_x64-py3.
 # Adding scripts to download from GTCA repository
 RUN mkdir /scripts
 COPY ./primary_manifest.R /scripts/
-COPY ./executing_docker.sh /scripts/
+COPY ./executing_docker_gdc_download.sh /scripts/
+COPY ./executing_docker_met_others.sh /scripts/
 
 # Add script to extract met reads
 COPY ./shrinkBam.py /scripts/
@@ -105,23 +106,35 @@ RUN sudo apt -y install autoconf automake make gcc perl zlib1g-dev libbz2-dev li
 RUN apt -y install git
 RUN git clone git://github.com/samtools/htslib.git
 RUN cd /htslib
-RUN autoreconf
-RUN ./configure
-RUN make
-RUN make install
+RUN autoreconf /htslib/configure.ac
+RUN /htslib/configure 
+RUN make -C /htslib
+RUN make install -C /htslib
 
 WORKDIR /
 
 RUN git clone https://github.com/samtools/samtools.git
 RUN cd /samtools
-RUN autoreconf
-RUN ./configure
-RUN make
-RUN make install
+RUN autoreconf /samtools/configure.ac
+RUN /samtools/configure
+RUN make -C /samtools
+RUN make install -C /samtools
 
 WORKDIR /
 
 RUN ln -s /usr/bin/python3 /usr/bin/python
+
+WORKDIR /
+
+RUN git clone https://github.com/pmelsted/BFCounter.git
+RUN cd /BFCounter
+RUN make -C /BFCounter
+
+WORKDIR / 
+
+RUN cp /BFCounter/BFCounter /bin
+
+WORKDIR /
 
 # cleanup
 RUN rm -rf /var/lib/apt/lists/* 
