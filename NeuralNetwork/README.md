@@ -21,7 +21,7 @@ WARNING.
 #' @param eV, matrix for prediction. Need to have the same structure as the file provided for the training. <br/>
 #' @param BW, file path with weight saved from nnMetTraining.R usually in BW folder. <br/>
 
- Before to use the BW file generated from nnMetTraining is very important to check the training pdf generated. In this file is very important that the learning curve is not ![flat](https://github.com/kendomaniac/metObservatory/tree/master/NeuralNetwork/Pictures/learningWrong.png).
+ Before to use the BW file generated from nnMetTraining is very important to check the training picture generated. In this file is very important that the learning curve is not ![flat](https://github.com/kendomaniac/metObservatory/tree/master/NeuralNetwork/Pictures/learningWrong.png).
 If is so, regenerate the BW running again nnMetTraining until you generate a proper learning 
 ![curve](https://github.com/kendomaniac/metObservatory/tree/master/NeuralNetwork/Pictures/learningCorrect.png?raw=true).
 DockerFile is a work in progress. The temporary docker used is repbioinfo/neuralnetworkmet. 
