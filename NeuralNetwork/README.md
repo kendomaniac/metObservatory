@@ -11,7 +11,7 @@ Using file test.R you can train and use the neural network simply downloading th
 #' @param seed, int value to garantee reproducibility.
 
 2) nnMetPredic . This function generate the predict file, based on the state vector gave in the previous function. E.G. using test.R predicted value close to one are related to wild type, predicted value close to 0 are related to delta skypped. 
-WARNING. Before to use the BW file generated from nnMetTraining is very important to check the training pdf generated. In this file is very important that the learning curve is not flat
+WARNING.
 #' @param scratch.folder, a character string indicating the path of the scratch folder<br/>
 #' @param file, a character string indicating the path of the file, with file name and extension included. This file is the one used for training. Need to have sample on the column and the raw kmers on the row. Even if this function is for prediction and not for training you need to provide the same file used for training. <br/>
 #' @param projectName, is an arbitrary name for the analysis. <br/>
@@ -21,8 +21,7 @@ WARNING. Before to use the BW file generated from nnMetTraining is very importan
 #' @param eV, matrix for prediction. Need to have the same structure as the file provided for the training. <br/>
 #' @param BW, file path with weight saved from nnMetTraining.R usually in BW folder. <br/>
 
-
-![flat](https://github.com/kendomaniac/metObservatory/tree/master/NeuralNetwork/Pictures/learningWrong.png).
+ Before to use the BW file generated from nnMetTraining is very important to check the training pdf generated. In this file is very important that the learning curve is not ![flat](https://github.com/kendomaniac/metObservatory/tree/master/NeuralNetwork/Pictures/learningWrong.png).
 If is so, regenerate the BW running again nnMetTraining until you generate a proper learning 
 ![curve](https://github.com/kendomaniac/metObservatory/tree/master/NeuralNetwork/Pictures/learningCorrect.png?raw=true).
 DockerFile is a work in progress. The temporary docker used is repbioinfo/neuralnetworkmet. 
