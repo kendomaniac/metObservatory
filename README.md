@@ -149,3 +149,7 @@ BFCounter is available in /bin from metobservatory_2020.05
 The script executing_BFCounter.sh allow k-mer generation from a folder in which is present the fastq.gz 
 
 ```
+
+## metObservatory.2021
+
+For details on how to operate metObservatory.2021, consult the README.md inside the metObservatory.2021 folder.
