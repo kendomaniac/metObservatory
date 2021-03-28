@@ -99,6 +99,16 @@ thread_n = 8
 
 This block sets the number of threads that the script can use for the genome generation and alignment steps.
 
+## output
+
+The output of the neural network is saved into "scratch" in a folder named x_results, with x being the same name as the "data" directory.
+
+Inside the folder there are three tables:
+
+- Predicted_pos_count_matrix.txt presents for each sample a value ranging from 0 to 1. The closer to 0 the value is, the closer the sample is to the exon 14 skipped MET condition according to the neural network. The closer to 1, the closer the sample is to the wild-type condition.
+- Pval_pos_count_matrix.txt presents for each sample the list of likelihood that the score assigned to the sample by the network at each epoch was correct and not due to randomness.
+-PvalSum_pos_count_matrix.txt is a table that takes in consideration the likelihoods presented in Pval_pos_count_matrix.txt to provide a total confidence value for the sample across all epochs, ranging from 0, meaning that the network has no confidence in the score assigned in Predicted_pos_count_matrix.txt to 1, meaning full confidence.
+
 ## example
 
 An example can be found by starting an instance of the container with a mounted folder:
