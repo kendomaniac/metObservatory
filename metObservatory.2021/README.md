@@ -56,8 +56,10 @@ If the "scratch" directory is "/home/user/metObs" and the name of the "data" dir
 ```
 define the scratch and data folders
 scratch = "/home/user/metObs"
-data ="data_folder"
+data ="/data_folder"
 ```
+
+Make sure that the "data" directory name is preceded by a "/".
 
 Inside of the "data" directory, each sample should be located in its own folder. The only sub-directories of "data" should be sample folders.
 
