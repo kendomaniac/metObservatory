@@ -7,7 +7,6 @@ To build the image, stay in the met14\_skipped\_detection\_tool folder and execu
 
 ```
 docker build --tag docker.io/repbioinfo/metobservatory.2021.01 .
-
 ```
 
 ## software
