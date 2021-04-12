@@ -25,10 +25,8 @@ COPY scripts_package.tar /scripts
 
 # Adding the example
 RUN mkdir /example
-COPY /example/example_NEG.R1.fastq.gz /example
-COPY /example/example_NEG.R2.fastq.gz /example
-COPY /example/example_POS.R1.fastq.gz /example
-COPY /example/example_POS.R2.fastq.gz /example
+COPY /example/example.R1.fastq.gz /example
+COPY /example/example.R2.fastq.gz /example
 
 # GCC
 RUN apt update
@@ -87,6 +85,17 @@ WORKDIR /
 # adding STAR
 RUN git clone https://github.com/alexdobin/STAR.git
 RUN make -C /STAR/source STAR
+
+WORKDIR /
+
+# adding BFCounter
+RUN git clone https://github.com/pmelsted/BFCounter.git
+RUN cd /BFCounter
+RUN make -C /BFCounter
+
+WORKDIR / 
+
+RUN cp /BFCounter/BFCounter /bin
 
 WORKDIR /
 
