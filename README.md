@@ -18,6 +18,8 @@ docker build --tag docker.io/repbioinfo/metobservatory.2021.01 .
 
 This script handles the entirety of the operations of metObservatory.2021.
 
+Please note that, since mapping is done with STAR, it is requested a computer with at least 32 GB RAM and a SSD to guarantee optimal I/O speed. 
+
 To operate it, the user has to procure the script itself and the related dependencies. To do so start an instance of the metObservatory.2021 container taking care to add a local folder as a mounted volume to move the scripts to using the following command:
 
 ```
