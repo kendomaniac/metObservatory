@@ -30,7 +30,7 @@ Then navigate to the /scripts folder in the container and copy the scripts_packa
 
 ```
 cd /scripts
-cp scripts_package /scratch
+cp scripts_package.tar /scratch
 ```
 
 At this point the container can be exited and the tar file should be decompressed.
