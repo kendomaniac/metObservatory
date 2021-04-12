@@ -53,7 +53,6 @@ This block describes the path that the script will operate on.
 ```
 #define a project name
 project = "project_name"
-
 ```
 
 This block defines the name of the project we will be working on.
