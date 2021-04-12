@@ -34,13 +34,13 @@ cp scripts_package.tar /scratch
 ```
 
 At this point the container can be exited and the tar file should be decompressed.
-
-The script can be launched using the following command:
-
 ```
-cd /path/to/script
-Rscript run_metObs.R
+# move to the local folder set as /scratch on the docker command above
+cd /path/to/local/folder 
+tar xvf scripts_package.tar
 ```
+
+Edit run_metObs.R
 
 Before launching it, the user should open the file and define the five parameters that describe its behaviour.
 
@@ -138,3 +138,12 @@ cp example_POS.R2.fastq.gz /scratch
 The examples should be placed inside in 2 folders, one for the NEG example files and one for the POS example files and then should be decompressed. Then these folders should be put inside the "data" directory.
 
 The NEG sample should produce a non-skipped prediction (close to 1) and the POS sample should produce a skipped prediction (close to 0).
+
+
+After ending the configuration the script can be launched using the following command:
+
+```
+Rscript run_metObs.R
+```
+
+
