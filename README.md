@@ -3,6 +3,8 @@ Pipeline to predict if a sample presents skipping of Exon 14 in MET, starting fr
 
 All the files relevant for the pipeline are included in the met14\_skipped\_detection\_tool folder.
 
+It is required that you have docker daemon installed: https://docs.docker.com/get-docker/
+
 To build the image, stay in the met14\_skipped\_detection\_tool folder and execute:
 
 ```
