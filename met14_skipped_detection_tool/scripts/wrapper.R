@@ -6,7 +6,7 @@ metObs=function(mode=c("setup","predict"),from,scratch.dir,data.dir,threads) {
     cat("The provided scratch directory doesn't exist.")
     return()
   }
-  if (!dir.exists(paste(scratch.dir,data.dir,sep="/"))) {
+  if (!dir.exists(paste(data.dir,sep="/"))) {
     cat("The provided data directory doesn't exist.")
     return()
   }
