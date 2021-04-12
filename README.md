@@ -5,7 +5,7 @@ All the files relevant for the pipeline are included in the met14\_skipped\_dete
 
 It is required that you have docker daemon installed: https://docs.docker.com/get-docker/
 
-To build the image, stay in the met14\_skipped\_detection\_tool folder and execute:
+To build the image from scratch, stay in the met14\_skipped\_detection\_tool folder and execute:
 
 ```
 docker build --tag docker.io/repbioinfo/metobservatory.2021.01 .
