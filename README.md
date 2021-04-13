@@ -104,7 +104,7 @@ The output of the "NN" mode is saved into "scratch" in a folder named x_NNresult
 
 Inside the folder there are three tables:
 
-- Predicted_pos_count_matrix.txt presents for each sample a value ranging from 0 to 1. The closer to 0 the value is, the closer the sample is to the exon 14 skipped MET condition according to the neural network. The closer to 1, the closer the sample is to the wild-type condition.
+- Predicted_pos_count_matrix.txt presents for each sample a value ranging from 0 to 1. The closer to 0 the value is, the closer the sample is to the exon 14 skipped MET condition according to the neural network, suggested threshold 0.1. The closer to 1, the closer the sample is to the wild-type condition.
 - Pval_pos_count_matrix.txt presents for each sample the list of likelihood that the score assigned to the sample by the network at each epoch was correct and not due to randomness.
 - PvalSum_pos_count_matrix.txt is a table that takes in consideration the likelihoods presented in Pval_pos_count_matrix.txt to provide a total confidence value for the sample across all epochs, ranging from 0, meaning that the network has no confidence in the score assigned in Predicted_pos_count_matrix.txt to 1, meaning full confidence.
 
@@ -117,7 +117,7 @@ In this case only a Predicted_kmer_freq_matrix.txt table is present, with the sa
 An example can be found by starting an instance of the container with a mounted folder:
 
 ```
-docker run -ti -v /path/to/local/folder:/scratch docker.io/repbioinfo/metobservatory.2021 /bin/bash
+docker run -ti -v /path/to/local/folder:/scratch docker.io/repbioinfo/metobservatory.2021.01 /bin/bash
 ```
 
 After that, two compressed fastqs (example.R1.fastq.gz and example.R2.fastq.gz) can be obtained by navigating to the /example folder and copying them into /scratch:
@@ -128,6 +128,20 @@ cp example.R1.fastq.gz /scratch
 cp example.R2.fastq.gz /scratch
 ```
 
-The examples should be placed inside a folder and then should be decompressed. Then these folders should be put inside the project directory.
+The examples should be placed inside a folder and then should be decompressed:
 
-The sample should produce a skipped prediction (close to 0) for both the "CNN" and the "NN" modes.
+```
+cd /scratch
+gzip -d example.R?.fastq.gz
+```
+
+Then these folders should be put inside the project directory:
+```
+cd /scratch
+mkdir myProj
+mkdir examplePOS
+mv example.R?.fastq ./examplePOS
+mv examplePOS ./myProj
+```
+
+The sample produces a skipped prediction (close to 0) for both the "CNN" and the "NN" modes.
