@@ -18,7 +18,7 @@ This script handles the entirety of the operations of metObservatory.2021.
 To operate it, the user has to procure the script itself and the related dependencies. To do so start an instance of the metObservatory.2021 container taking care to add a local folder as a mounted volume to move the scripts to using the following command:
 
 ```
-docker run -ti -v /path/to/local/folder:/scratch docker.io/repbioinfo/metobservatory.2021 /bin/bash
+docker run -ti -v /path/to/local/folder:/scratch docker.io/repbioinfo/metobservatory.2021.01 /bin/bash
 ```
 
 Then navigate to the /scripts folder in the container and copy the scripts_package.tar file into /scratch in this manner:
